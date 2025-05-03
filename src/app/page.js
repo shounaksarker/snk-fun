@@ -4,7 +4,8 @@ import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 
 const projects = [
-  { name: "IELTS", path: "/ielts/listening", color: "bg-red-400" },
+  { name: "Proposal", path: "/proposal", color: "bg-red-400" },
+  { name: "IELTS", path: "/ielts/listening", color: "bg-yellow-400" },
   // Add more projects here...
 ];
 

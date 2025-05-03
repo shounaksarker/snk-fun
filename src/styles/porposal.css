@@ -1,0 +1,49 @@
+@keyframes gradient-animation {
+  0%,
+  100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+.animated-border {
+  display: block;
+  background-image: linear-gradient(
+    to right,
+    #86efac,
+    #6993f0,
+    #fca5a5
+  ); /* from-green-300 via-blue-600 to-red-300 */
+  background-size: 400% 400%;
+  animation: gradient-animation 6s ease infinite;
+}
+.gradient-text {
+  background: linear-gradient(to right, #86efac, #6993f0, #fca5a5);
+}
+.gradient-text-btn {
+  background: linear-gradient(to right,#ffffff, #ffbbb6, #e5ff3f);
+}
+.gradient-text-white-bg {
+  background: linear-gradient(to right, #7e22ce, #c026d3, #e11d48);
+}
+
+.gradient-text,
+.gradient-text-btn,
+.gradient-text-white-bg {
+  background-size: 200% auto;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: shine 6s linear infinite;
+}
+
+@keyframes shine {
+  0% {
+    background-position: 0% center;
+  }
+  100% {
+    background-position: 200% center;
+  }
+}
