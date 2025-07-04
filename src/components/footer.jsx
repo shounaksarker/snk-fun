@@ -5,7 +5,9 @@ const Footer = () => {
   return (
     <footer className="w-full py-4 md:py-8 bg-indigo-950 text-white text-center relative bottom-0 overflow-hidden">
       <div className="relative z-10">
-        <Link href="/" className="text-xl font-semibold">Made with ☕ 🧠 👨‍💻</Link>
+        <Link href="/" className="text-xl font-semibold">
+          Made with ☕ 🧠 👨‍💻
+        </Link>
         <p className="mt-2 text-sm text-indigo-300">
           © {new Date().getFullYear()} SnkFun — Don&apos;t just code, make it
           fun!

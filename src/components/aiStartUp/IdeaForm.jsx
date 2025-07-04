@@ -114,7 +114,7 @@ const IdeaForm = () => {
           disabled={loading}
           className="mt-8 w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 rounded-2xl shadow-lg transition text-lg cursor-pointer disabled:opacity-70 disabled:cursor-not-allowed"
         >
-          {loading ? "Generating..." : "Generate Idea" }
+          {loading ? "Generating..." : "Generate Idea"}
         </button>
 
         <AnimatePresence>
