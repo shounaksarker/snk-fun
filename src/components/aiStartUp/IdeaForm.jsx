@@ -50,105 +50,99 @@ const IdeaForm = () => {
   };
 
   return (
-    <motion.div
-      className="max-w-3xl mx-auto mt-16 px-4 text-center py-4"
-      initial={{ opacity: 0, y: 30 }}
-      animate={{ opacity: 1, y: 0 }}
-    >
-      <motion.h1
-        className="text-3xl font-bold mb-6"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 0.2 }}
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-b from-blue-100 to-white px-4 mb-2">
+      <motion.div
+        className="bg-white shadow-2xl rounded-3xl p-8 w-full max-w-xl"
+        initial={{ opacity: 0, y: 30 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6 }}
       >
-        Startup Idea Generator 🚀
-      </motion.h1>
+        <h1 className="text-4xl font-extrabold text-center text-gray-900 flex items-center justify-center gap-2">
+          Startup Idea Generator <span className="text-3xl">🚀</span>
+        </h1>
+        <p className="text-center text-gray-600 mt-2">
+          Turn any idea into a funny startup pitch
+        </p>
 
-      <form onSubmit={handleSubmit} className="space-y-4">
-        <div>
-          <label className="block text-left font-semibold mb-2">
-            Type your startup idea/goal:{" "}
-            <small className="font-thin text-gray-600">
-              (max 50 characters)
-            </small>
-          </label>
-          <div className="flex flex-col md:flex-row gap-3 my-4">
-            <input
-              type="text"
-              maxLength="50"
-              placeholder="ex: I want to build a Cow Farm..."
-              className="flex-2 w-full border px-4 py-2 rounded-md shadow focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm md:text-base placeholder:text-sm"
-              value={userIdea}
-              onChange={(e) => setUserIdea(e.target.value)}
-            />
-            <button
-              type="button"
-              onClick={handleSurpriseMe}
-              className="w-full md:max-w-[85px] text-white bg-gradient-to-r from-indigo-500 to-purple-600 hover:from-purple-600 hover:to-indigo-500 transition-all duration-300 font-semibold p-2 rounded-md shadow-md text-xs"
-            >
-              🎲 Surprise
-            </button>
+        <div className="flex items-center gap-3 mt-6">
+          <input
+            type="text"
+            value={userIdea}
+            onChange={(e) => setUserIdea(e.target.value)}
+            placeholder="ex: I want to build a Cow Farm..."
+            maxLength={50}
+            className="flex-1 p-3 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-400 transition"
+          />
+          <button
+            onClick={handleSurpriseMe}
+            className="text-pink-800 font-semibold underline text-xs hover:brightness-110 transition cursor-pointer"
+          >
+            🎲 Surprise
+          </button>
+        </div>
+
+        <div className="mt-5 text-center">
+          <p className="text-sm text-gray-700 mb-2">
+            Choose Response Language:
+          </p>
+          <div className="flex justify-center gap-6">
+            <label className="flex items-center gap-1 cursor-pointer">
+              <input
+                type="radio"
+                name="lang"
+                value="bn"
+                checked={language === "Bangla"}
+                onChange={() => setLanguage("Bangla")}
+              />
+              বাংলা
+            </label>
+            <label className="flex items-center gap-1 cursor-pointer">
+              <input
+                type="radio"
+                name="lang"
+                value="en"
+                checked={language === "English"}
+                onChange={() => setLanguage("English")}
+              />
+              English
+            </label>
           </div>
         </div>
 
-        <div className="flex justify-center gap-6 text-sm">
-          <h3 className="font-medium">Choose Response Language?: </h3>
-          <label className="flex items-center space-x-2">
-            <input
-              type="radio"
-              name="lang"
-              value="Bangla"
-              checked={language === "Bangla"}
-              onChange={() => setLanguage("Bangla")}
-            />
-            <span>বাংলা</span>
-          </label>
-          <label className="flex items-center space-x-2">
-            <input
-              type="radio"
-              name="lang"
-              value="English"
-              checked={language === "English"}
-              onChange={() => setLanguage("English")}
-            />
-            <span>English</span>
-          </label>
-        </div>
-
         <button
-          type="submit"
+          onClick={handleSubmit}
           disabled={loading}
-          className="bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-2 rounded-md transition shadow-lg disabled:opacity-50"
+          className="mt-8 w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 rounded-2xl shadow-lg transition text-lg cursor-pointer disabled:opacity-70 disabled:cursor-not-allowed"
         >
-          {loading ? "Generating..." : "Generate Idea"}
+          {loading ? "Generating..." : "Generate Idea" }
         </button>
-      </form>
 
-      <AnimatePresence>
-        {response && (
-          <motion.div
-            key="response"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.3 }}
-          >
-            <ResponseCard text={response} />
-          </motion.div>
+        <AnimatePresence>
+          {response && (
+            <motion.div
+              key="response"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              transition={{ duration: 0.3 }}
+            >
+              <ResponseCard text={response} />
+            </motion.div>
+          )}
+        </AnimatePresence>
+
+        {error && (
+          <Toast type="error" message={error} onClose={() => setError("")} />
         )}
-      </AnimatePresence>
-
-      {error && (
-        <Toast type="error" message={error} onClose={() => setError("")} />
-      )}
-      {success && (
-        <Toast
-          type="success"
-          message={success}
-          onClose={() => setSuccess("")}
-        />
-      )}
-    </motion.div>
+        {success && (
+          <Toast
+            type="success"
+            message={success}
+            onClose={() => setSuccess("")}
+          />
+        )}
+      </motion.div>
+    </div>
   );
 };
 
